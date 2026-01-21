@@ -313,6 +313,18 @@
 
                 const viewer = await main(appElement.app, cameraElement.entity, settingsJson, config);
                 
+                // Auto-frame the scene to fit the model in view
+                if (viewer && viewer.global && viewer.global.events) {
+                    viewer.global.events.on('firstFrame', () => {
+                        // Trigger auto-framing after first frame
+                        setTimeout(() => {
+                            if (viewer && viewer.global && viewer.global.events) {
+                                viewer.global.events.fire('inputEvent', { type: 'frame' });
+                            }
+                        }, 500);
+                    });
+                }
+                
                 // Force high quality rendering for embedded player
                 if (viewer && viewer.global && viewer.global.app) {
                     const gsplat = viewer.global.app.scene.gsplat;
