@@ -399,7 +399,21 @@
                     settings
                 ]);
 
-                const contentsBuffer = await config.contents; console.log("Contents loaded:", contentsBuffer.byteLength, "bytes"); const resolvedConfig = { ...config, contents: contentsBuffer }; viewerInstance = await main(appElement.app, cameraElement.entity, settingsJson, resolvedConfig);
+                const contentsBuffer = await config.contents;
+                const resolvedConfig = { ...config, contents: contentsBuffer };
+                viewerInstance = await main(appElement.app, cameraElement.entity, settingsJson, resolvedConfig);
+                
+                // Auto-frame the scene to fit the model in view
+                if (viewerInstance && viewerInstance.global && viewerInstance.global.events) {
+                    viewerInstance.global.events.on('firstFrame', () => {
+                        // Trigger auto-framing after first frame
+                        setTimeout(() => {
+                            if (viewerInstance && viewerInstance.global && viewerInstance.global.events) {
+                                viewerInstance.global.events.fire('inputEvent', { type: 'frame' });
+                            }
+                        }, 500);
+                    });
+                }
                 
                 // Force high quality rendering
                 if (viewerInstance && viewerInstance.global && viewerInstance.global.app) {
