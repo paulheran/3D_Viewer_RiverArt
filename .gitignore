@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+*.log
+.env
+REFERENCE/
+get-camera-position.js
+embed.html
+riverart.html
+riverart-player.html
