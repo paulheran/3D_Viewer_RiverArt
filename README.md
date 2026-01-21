@@ -16,7 +16,7 @@ A 3D Gaussian Splatting viewer for the RiverArt scene, designed to be embedded i
 - `index.js` - SuperSplat viewer JavaScript
 - `index.css` - Viewer styles
 - `settings.json` - Camera and rendering settings
-- `assets/RiverArt_cutout.sog` - 3D model file
+- `assets/RiverArt_cutout_2.sog` - 3D model file
 
 ## Setup
 
